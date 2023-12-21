@@ -1,0 +1,33 @@
+{% extends 'client_header.html' %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/order_list.css' %}">
+{% endblock %}
+{% block content %}
+<div class="pic_frame">
+    <h1>Categories</h1>
+</div>
+<div class="order_list">
+    <div class="order_list_frame">
+        <div class="order_list_group">
+            {% if category_list %}
+            <ul>
+                {% for category in category_list %}
+                    <li>
+                        <a href="{% url 'prototype:category_detail' category.id %}">
+                            category: {{category.name}}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+                <p>There are no category</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<div class="pic_frame">
+    <h1>End of Category list</h1>
+</div>
+{% endblock %}
+

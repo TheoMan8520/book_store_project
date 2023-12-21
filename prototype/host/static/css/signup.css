@@ -1,0 +1,96 @@
+.signup {
+    /*background: black;*/
+    width: 100%;
+    /*padding: 1px 3% 1px 2%;*/
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    color: #645949;
+}
+
+.signup h2 {
+    text-align: center;
+}
+
+.signup_form {
+    /*position: absolute;*/
+    /*top: 15%;*/
+    /*right: 30%;*/
+    width: 400px;
+}
+
+.signup_form a {
+    text-decoration: none;
+    color: #E8D9C2;
+
+    font-family: "DM Sans";
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.input_group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: white;
+    margin: 20px;
+    padding: 15px;
+    gap: 5px;
+    border-radius: 10px;
+}
+
+.input_group hr {
+    border: 0;
+    height: 1px;
+    width: 100%;
+    background: #645949;
+    margin: 8px 0 10px;
+}
+
+.input_unit {
+    display: flex;
+    align-items: center;
+    width: 90%;
+    /*margin: 12px 0 12px 0;*/
+    /*border: 2px solid red;*/
+    /*border-radius: 4px;*/
+}
+
+.input_unit img {
+    width: 40px;
+    border-radius: 50%;
+    padding: 8px;
+    margin-right: 10px;
+}
+
+.input_unit input {
+    font-family: "DM Sans";
+    width: 70%;
+    font-size: 15px;
+    border: none;
+    border-bottom: 2px solid #E8D9C2;
+    text-align: left;
+}
+
+.submit {
+    width: fit-content;
+    padding: 5px 20px 5px 20px;
+
+    cursor: pointer;
+    border: none;
+    color: #645949;
+    background: #E8D9C2;
+
+    font-family: "DM Sans";
+    font-size: 15px;
+    font-weight: 600;
+    border: 2px solid #42473F;
+    border-radius: 4px;
+}
+
+.submit:hover {
+    background: #645949;
+    color: #E8D9C2;
+}

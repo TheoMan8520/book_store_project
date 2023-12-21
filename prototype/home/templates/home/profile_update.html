@@ -1,0 +1,47 @@
+{% extends 'client_header.html' %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/profile_update.css' %}">
+{% endblock %}
+{% block content %}
+
+{% if errors %}
+  <p>Your username maybe used. Please try again.</p>
+{% endif %}
+
+<div class="update">
+  <form action="{% url 'prototype:profile_update' %}" method="POST" class="update_form">
+        {% csrf_token %}
+        <div class="input_group">
+            <h2>Edit profile</h2>
+            <hr>
+            <div class="input_unit">
+                <img src="{% static 'pics/square.JPG' %}">
+                <input required name="username" id="username" type="text" class="input_form" value="{{user.username}}" maxlength="16" minlength="4">
+            </div>
+            <div class="input_unit">
+                <img src="{% static 'pics/square.JPG' %}">
+                <input required name="first_name" id="first_name" type="text" class="input_form" value="{{user.first_name}}" placeholder = "first name" maxlength="20" minlength="2">
+            </div>
+            <div class="input_unit">
+                <img src="{% static 'pics/square.JPG' %}">
+                <input required name="last_name" id="last_name" type="text" class="input_form" value="{{user.last_name}}" placeholder = "last name" maxlength="20" minlength="2">
+            </div>
+            <div class="input_unit">
+                <img src="{% static 'pics/square.JPG' %}">
+                <input required name="email" id="email" type="email" class="input_form" value="{{user.email}}">
+            </div>
+            <div class="input_unit">
+                <img src="{% static 'pics/square.JPG' %}">
+                <input required name="address" id="address" type="text" class="input_form" value="{{address}}" placeholder = "first name" maxlength="100" minlength="6">
+            </div>
+            <input type="submit" class="submit" value="Update">
+        </div>
+    </form>
+</div>
+  <!--<form method="post">-->
+  <!--  {% csrf_token %}-->
+  <!--  {{ form.as_p }}-->
+  <!--  <button type="submit">Sign up</button>-->
+  <!--</form>-->
+{% endblock %}

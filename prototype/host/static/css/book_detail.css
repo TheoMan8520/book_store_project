@@ -1,0 +1,118 @@
+.pic_frame {
+    display: flex;
+    flex-direction: column;
+    height: 150px;
+    background: url('../pics/creation_of_adam.jpeg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.pic_frame h1 {
+    font-family: "DM Sans";
+    font-size: 40px;
+    margin-top: 50px;
+    text-align: center;
+}
+
+/* ############################################################################# */
+
+.book_detail {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    font-family: "Kanit";
+    color: darkslateblue;
+}
+
+.book_detail_frame {
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: white;
+    margin: 20px;
+    padding: 20px;
+    gap: 5px;
+    border-radius: 10px;
+}
+
+.detail {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    /*margin: 12px 0 12px 0;*/
+    /*border: 2px solid red;*/
+    /*border-radius: 4px;*/
+}
+
+.book_detail_frame hr {
+    border: 0;
+    height: 1px;
+    width: 100%;
+    background: #42473F;
+    margin: 8px 0 10px;
+}
+
+.detail img {
+    width: 300px;
+    height: 400px;
+    object-fit: cover;
+    /*padding: 8px;*/
+    margin-right: 10px;
+}
+
+.text {
+    font-family: "DM Sans";
+    color: #645949;
+
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin-left: 30px;
+}
+
+.fav_frame {
+
+}
+
+.fav_icon {
+    width: 100px;
+    align-items: center;
+
+    font-family: "DM Sans";
+    font-size: 15px;
+    font-weight: 600;
+    background: #E8D9C2;
+    color: #645949;
+    border-radius: 5px;
+    padding: 5px;
+    /*border: 2px solid blue;*/
+}
+.fav_icon:hover {
+    background: #7E8266;
+    /*border: 2px solid blue;*/
+}
+
+.bask_icon {
+    width: 150px;
+    align-items: center;
+
+    font-family: "DM Sans";
+    font-size: 15px;
+    font-weight: 600;
+    background: #E8D9C2;
+    color: #645949;
+    border-radius: 5px;
+    padding: 5px;
+    /*border: 2px solid blue;*/
+}
+.bask_icon:hover {
+    background: #7E8266;
+
+    /*border: 2px solid blue;*/
+}

@@ -1,0 +1,156 @@
+.pic_frame {
+    display: flex;
+    flex-direction: column;
+    height: 300px;
+    background: url('../pics/creation_of_adam.jpeg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.pic_frame h1 {
+    font-family: "DM Sans";
+    font-size: 50px;
+    margin-top: 110px;
+    text-align: center;
+}
+
+/* ############################################################################# */
+.moto {
+    display: flex;
+}
+
+.text{
+    font-size: 30px;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+/*     border: 2px solid red;  */
+    padding-top: 80px
+}
+
+.text1 {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+/*     border: 2px solid blue;  */
+    margin-right: 135px;
+    height: 40px
+}
+
+.text1 h1{
+    font-size: 50px;
+    font-weight: 800;
+    padding-bottom: 10px;
+    margin: 0;
+    margin-left: 15px;
+}
+
+.text2 {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+/*     border: 2px solid blue;  */
+    margin-right: 110px;
+}
+.text3 {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+/*     border: 2px solid blue;  */
+    margin-right: 335px;
+    font-size: 20px
+}
+
+
+.pic {
+    display: flex;
+    align-items: center;
+}
+.pic img {
+    height: 300px;
+}
+
+/* ################################################################### */
+.head_trend {
+    background-color: #E8D9C2;
+    flex-direction: column;
+    height: 80px;
+    display: flex;
+    align-items: center;
+}
+
+.head_trend h1 {
+    font-size: 20px;
+    color: #42473F;
+    margin-top: 28px;
+    text-align: center;
+}
+
+.head {
+    background-color: #42473F;
+    flex-direction: column;
+    height: 80px;
+    display: flex;
+    align-items: center;
+}
+
+.head h1 {
+    font-size: 20px;
+    margin-top: 25px;
+    text-align: center;
+}
+
+
+.body {
+    background-color: #E8D9C2;
+    height: 250px;
+/*     border: 2px solid black; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 50px;
+}
+
+.book_list_group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    /*margin: 12px 0 12px 0;*/
+/*     border: 2px solid red; */
+    /*border-radius: 4px;*/
+}
+
+.book_list_group ul {
+    width: 95%;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+    gap: 70px;
+    padding: 0;
+/*     border: 2px solid blue; */
+}
+
+.book_list_group ul li {
+    list-style: none;
+    display: flex;
+    height: 250px;
+    width: 150px;
+/*     border: 2px solid blue; */
+}
+
+.book_list_group ul li a img {
+    height: 200px;
+    width: 150px;
+    object-fit: cover;
+    /*padding: 8px;*/
+}
+
+.book_list_group ul li a h2 {
+    font-size: 15px;
+    color: #42473F;
+}
+
+.fav_sec {
+    cursor: pointer;
+}

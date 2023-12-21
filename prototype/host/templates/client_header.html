@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300|Fahkwang:300|Kanit:300|DM Sans:400" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/header.css' %}">
+    <!--<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+    <title>The Library</title>
+    {% block head %} {% endblock %}
+    <!--<title>{% block title %}{{ settings.APP_NAME }}{% endblock %}</title>-->
+</head>
+
+<body>
+    <div class='header'>
+        <div class="header0">
+            <form action="{% url 'prototype:search' %}" method="GET" class="search_unit">
+                {% csrf_token %}
+                <input name="search" id="seacrh" type="text" class="search_input" placeholder="Search" value="{{seacrh}}" maxlength="70" minlength="2">
+                <a href="javascript:;" onclick="parentNode.submit();" class="search_icon">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </a>
+            </form>
+            {% if user.is_authenticated %}
+                <img src="{% static 'pics/square.JPG' %}" class="user-pic" onclick="toggleMenu()">
+                <div class="sub_menu_wrap" id="subMenu">
+                    <div class="sub_menu">
+                        <div class="user_info">
+                            <img src="{% static 'pics/square.JPG' %}">
+                            <h2>{{ user.username }}</h2>
+                        </div>
+                        <hr>
+                        {% if user.is_superuser %}
+                            <a href="{% url 'prototype:orders' %}" class="sub_menu_link">
+                                <img src="{% static 'pics/payment.jpg' %}">
+                                <p>ยืนยันการชำระเงิน/แจ้งจัดส่ง</p>
+                                <span>></span>
+                            </a>
+                            <a href="{% url 'prototype:history' %}" class="sub_menu_link">
+                                <img src="{% static 'pics/history.jpg' %}">
+                                <p>History</p>
+                                <span>></span>
+                            </a>
+                            <a href="{% url 'prototype:book_create' %}" class="sub_menu_link">
+                                <img src="{% static 'pics/book.jpg' %}">
+                                <p>Create Book</p>
+                                <span>></span>
+                            </a>
+                            <a href="{% url 'prototype:publisher_create' %}" class="sub_menu_link">
+                                <img src="{% static 'pics/publisher.jpg' %}">
+                                <p>Create Publisher</p>
+                                <span>></span>
+                            </a>
+                            <a href="{% url 'prototype:author_create' %}" class="sub_menu_link">
+                                <img src="{% static 'pics/author.jpg' %}">
+                                <p>Create Author</p>
+                                <span>></span>
+                            </a>
+                            <a href="{% url 'prototype:category_create' %}" class="sub_menu_link">
+                                <img src="{% static 'pics/category.jpg' %}">
+                                <p>Create Category</p>
+                                <span>></span>
+                            </a>
+                            <a href="https://www.instagram.com/p/CrODx39vobD/?igshid=YmMyMTA2M2Y=" target="_blank" class="sub_menu_link">
+                                <img src="{% static 'pics/help.jpg' %}">
+                                <p>Help & Support</p>
+                                <span>></span>
+                            </a>
+                        {% else %}
+                            <a href="{% url 'prototype:profile_update' %}" class="sub_menu_link">
+                                <img src="{% static 'pics/edit profile.jpg' %}">
+                                <p>Edit Profile</p>
+                                <span>></span>
+                            </a>
+                            <a href="{% url 'prototype:favorites' %}" class="sub_menu_link">
+                                <img src="{% static 'pics/favorite.jpg' %}">
+                                <p>รายการที่ชอบ</p>
+                                <span>></span>
+                            </a>
+                            <a href="{% url 'prototype:history' %}" class="sub_menu_link">
+                                <img src="{% static 'pics/history.jpg' %}">
+                                <p>ประวัติการซื้อ</p>
+                                <span>></span>
+                            </a>
+                            <a href="{% url 'prototype:orders' %}" class="sub_menu_link">
+                                <img src="{% static 'pics/payment.jpg' %}">
+                                <p>แจ้งชำระเงิน</p>
+                                <span>></span>
+                            </a>
+                            <a href="https://www.instagram.com/p/CrODx39vobD/?igshid=YmMyMTA2M2Y=" target="_blank" class="sub_menu_link">
+                                <img src="{% static 'pics/help.jpg' %}">
+                                <p>Help & Support</p>
+                                <span>></span>
+                            </a>
+                        {% endif%}
+                        <a href="{% url 'logout' %}?next={% url 'prototype:all' %}" class="sub_menu_link">
+                            <img src="{% static 'pics/logout.jpg' %}">
+                            <p>Log Out</p>
+                            <span>></span>
+                        </a>
+                    </div>
+                </div>
+            {% endif%}
+        </div>
+
+        <nav>
+            <a href="{% url 'prototype:all' %}">
+                <img src="{% static 'pics/LOGO.JPG' %}" class="logo">
+            </a>
+            <ul>
+                <li><a href="{% url 'prototype:all' %}">Home</a></li>
+                <li><a href="{% url 'prototype:book_list' %}">All Books</a></li>
+                <li><a href="{% url 'prototype:publisher_list' %}">Publishers</a></li>
+                <li><a href="{% url 'prototype:author_list' %}">Authors</a></li>
+                <li><a href="{% url 'prototype:category_list' %}">Category</a></li>
+                {% if user.is_superuser %}
+                    <li><a href="{% url 'prototype:book_create' %}">Create Book</a></li>
+                    <li><a href="{% url 'prototype:publisher_create' %}">Create Publisher</a></li>
+                {% elif not user.is_authenticated %}
+                    <li><a href="{% url 'login' %}" class="header_login">Login</a></li>
+                {% endif%}
+            </ul>
+            {% if user.is_authenticated and not user.is_superuser %}
+                <a href="{% url 'prototype:basket' %}" class="icon_frame">
+                    <!--<img src="{% static 'pics/square.JPG' %}" class="icon">-->
+                    <h2>View my basket</h2>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="icon"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M253.3 35.1c6.1-11.8 1.5-26.3-10.2-32.4s-26.3-1.5-32.4 10.2L117.6 192H32c-17.7 0-32 14.3-32 32s14.3 32 32 32L83.9 463.5C91 492 116.6 512 146 512H430c29.4 0 55-20 62.1-48.5L544 256c17.7 0 32-14.3 32-32s-14.3-32-32-32H458.4L365.3 12.9C359.2 1.2 344.7-3.4 332.9 2.7s-16.3 20.6-10.2 32.4L404.3 192H171.7L253.3 35.1zM192 304v96c0 8.8-7.2 16-16 16s-16-7.2-16-16V304c0-8.8 7.2-16 16-16s16 7.2 16 16zm96-16c8.8 0 16 7.2 16 16v96c0 8.8-7.2 16-16 16s-16-7.2-16-16V304c0-8.8 7.2-16 16-16zm128 16v96c0 8.8-7.2 16-16 16s-16-7.2-16-16V304c0-8.8 7.2-16 16-16s16 7.2 16 16z"/></svg>
+                </a>
+            {% endif %}
+        </nav>
+    </div>
+    <script>
+        let subMenu = document.getElementById("subMenu");
+
+        function toggleMenu(){
+            subMenu.classList.toggle("open_menu");
+        }
+    </script>
+    {% block content %}
+
+    {% endblock %}
+<div class="footer_frame">
+    <div class="footer1">
+        <h1>THE LIBRARY</h1>
+        <ul>
+            <li><a href="https://www.instagram.com/p/CrN7yAhPCNF/?igshid=YmMyMTA2M2Y%3D" target="_blank"> ABOUT US
+            </a></li> |
+            <li><a href="https://www.instagram.com/p/CrODx39vobD/?igshid=YmMyMTA2M2Y=" target="_blank"> RETURN & EXCHANGE
+            </a></li> |
+            <li><a href="https://www.instagram.com/p/CrODx39vobD/?igshid=YmMyMTA2M2Y=" target="_blank"> REVIEW
+            </a></li> |
+            <li><a href="https://www.instagram.com/p/CrODx39vobD/?igshid=YmMyMTA2M2Y=" target="_blank"> FAQ
+            </a></li>
+        </ul>
+    </div>
+    <div class="footer2">
+        <h1>BE IN CONTACT WITH THE LIBRARY</h1>
+        <ul>
+            <li>FOLLOW US:</li>
+            <li><a href="https://www.instagram.com/p/CrODx39vobD/?igshid=YmMyMTA2M2Y=" target="_blank"> FACEBOOK
+            </a></li> |
+            <li><a href="https://www.instagram.com/p/CrODx39vobD/?igshid=YmMyMTA2M2Y=" target="_blank"> INSTAGRAM
+            </a></li> |
+            <li><a href="https://www.instagram.com/p/CrODx39vobD/?igshid=YmMyMTA2M2Y=" target="_blank"> LINE
+            </a></li>
+        </ul>
+    </div>
+</div>
+
+<!-- Site footer -->
+<!--<footer class="site-footer">-->
+<!--      <div class="container">-->
+<!--        <div class="row">-->
+<!--          <div class="col-sm-12 col-md-6">-->
+<!--            <h6>QUOTE OF THE DAY</h6>-->
+<!--            <p class="text-justify">A room without book  <i>is like a body without a soul</p>-->
+<!--          </div>-->
+
+<!--          <div class="col-xs-6 col-md-3">-->
+<!--            <h6>SOCIAL MEDIA</h6>-->
+<!--            <ul class="footer-links">-->
+<!--             <a href="https://instagram.com/thelibrary8520?igshid=YmMyMTA2M2Y=">Instagram</a>-->
+<!--            </ul>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <hr>-->
+<!--      </div>-->
+<!--      <div class="container">-->
+<!--        <div class="row">-->
+<!--          <div class="col-md-8 col-sm-6 col-xs-12">-->
+<!--            <p class="copyright-text">Copyright &copy; 2023 All Rights Reserved by-->
+<!--         <a href="https://www.instagram.com/p/CrN7yAhPCNF/?igshid=YmMyMTA2M2Y%3D">GROUP 10</a>-->
+<!--            </p>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--</footer>-->
+
+</body>
+
+</html>

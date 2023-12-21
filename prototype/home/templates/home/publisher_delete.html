@@ -1,0 +1,15 @@
+{% extends 'client_header.html' %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/publisher_delete.css' %}">
+{% endblock %}
+{% block content %}
+<h1>Delete publisher</h1>
+
+<p>Are you sure you want to delete the publisher: {{ publisher.id }} {{ publisher.name }}?</p>
+
+<form action="" method="POST">
+  {% csrf_token %}
+  <input type="submit" value="Yes, delete.">
+</form>
+{% endblock %}

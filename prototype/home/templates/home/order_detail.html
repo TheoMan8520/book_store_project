@@ -1,0 +1,87 @@
+{% extends 'client_header.html' %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/order_detail.css' %}">
+{% endblock %}
+{% block content %}
+<div class="book_list">
+    <div class="book_list_frame">
+        <h1>Order: {{order.id}}</h1>
+        <h1>Order_user: {{order.user.username}}</h1>
+        <div class="book_list_group">
+            <ul>
+            {% for record in records %}
+                <li>
+                    <a href="{% url 'prototype:book_detail'  record.book.id %}">
+                        {% if record.book.content_type %}
+                            <img src="{% url 'prototype:book_picture' record.book.id %}">
+                        {% endif %}
+                    </a>
+                    <div class="div1">
+                        <div class="subdiv1">
+                            <div class="book_detail">
+                                <h2>Title: {{ record.book.title }}</h2>
+                                <h2>Price: {{ record.book.price }} bath</h2>
+                                <h2>amount: x{{ record.amount }} = {{record.total}}</h2>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+            </ul>
+        </div>
+        <div class="sum">
+            Shipping:     50
+            <br>
+            Total:      {{order.total}}
+        </div>
+        <div order_detail>
+            status: {{order.status}}
+            {% if order.status == "รอการชำระเงิน" and not user.is_superuser %}
+                <a href="{% url 'prototype:order_delete' order.id %}">delete order</a>
+                <hr>
+                <p>โอนเงินมาที่ พร้อมเพย์ 0943471643 ปรมัตถ์ จันทร์ดา</p>
+                <form action="{% url 'prototype:order_detail' order.id %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="input_unit">
+                        <img src="{% static 'pics/square.JPG' %}">
+                        <input required name="payment" id="payment" type="file" class="input_form">
+                    </div>
+                    <div class="input_unit">
+                        <img src="{% static 'pics/square.JPG' %}">
+                        <input name="destination" id="destination" type="text" class="input_form" value="{{address}}" placeholder="ที่อยู่การจัดส่ง" maxlength="200" minlength="2">
+                    </div>
+                    <input type="submit" class="submit">
+                </form>
+            {% else %}
+                {% if order.content_type %}
+                    <img class="payment" src="{% url 'prototype:order_picture' order.id %}">
+                {% endif %}
+                {{order.destination}}
+                {% if order.status == "จัดส่งแล้ว" %}
+                    post_ocde: {{order.post_code}}
+                {% endif %}
+
+                {% if user.is_superuser %}
+                    <form action="{% url 'prototype:admin_confirm' order.id %}" method="POST" class="admin_confirm">
+                        {% csrf_token %}
+                        {% if order.status == "รอการตรวจสอบการชำระเงิน" %}
+                            <!--<input type="submit" value="ยืนยันการชำระเงิน" class="submit" >-->
+                            <a href="{% url 'prototype:admin_confirm' order.id %}" class="submit">ยืนยันการชำระเงิน</a>
+                        {% elif order.status == "ยืนยันการชำระเงิน รอการจัดส่ง" %}
+                            <div class="input_unit">
+                                <img src="{% static 'pics/square.JPG' %}">
+                                <input required name="post_code" id="post_code" type="text" class="input_form" placeholder="post code" maxlength="50" minlength="2">
+                            </div>
+                            <input type="submit" value="จัดส่งแล้่ว" class="submit" >
+                            <!--<a href="{% url 'prototype:admin_confirm' order.id %}">จัดส่งแล้ว</a>-->
+                        {% endif %}
+                    </form>
+                    <a id="delete" href="{% url 'prototype:order_delete' order.id %}">delete order</a>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+

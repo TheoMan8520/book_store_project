@@ -1,0 +1,22 @@
+{% extends 'client_header.html' %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/category_form.css' %}">
+{% endblock %}
+{% block content %}
+<div class="category_create">
+    <form method="POST" class="category_form" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="input_group">
+            <h2>Category form</h2>
+            <hr>
+            <div class="input_unit">
+                <img src="{% static 'pics/square.JPG' %}">
+                <input required name="name" id="name" type="text" class="input_form" placeholder="Category name" maxlength="70" minlength="2">
+            </div>
+
+            <input type="submit" class="submit">
+        </div>
+    </form>
+</div>
+{% endblock %}

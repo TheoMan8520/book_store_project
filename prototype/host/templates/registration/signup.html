@@ -1,0 +1,45 @@
+{% extends 'client_header.html' %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/signup.css' %}">
+{% endblock %}
+{% block content %}
+
+{% if errors %}
+  <p>There was an error. Your username maybe used already, or your password was not matched/invalid. Please try again.</p>
+{% endif %}
+
+<div class="signup">
+  <form method="POST" actione="." class="signup_form" id="signup-form">
+        {% csrf_token %}
+        <div class="input_group">
+            <h2>Sign up</h2>
+            <hr>
+            <div class="input_unit">
+                <img src="{% static 'pics/square.JPG' %}">
+                <input required name="username" id="username" type="text" class="input_form" placeholder="Username" maxlength="16" minlength="4">
+            </div>
+            <div class="input_unit">
+                <img src="{% static 'pics/square.JPG' %}">
+                <input required name="email" id="email" type="email" class="input_form" placeholder="User@gmail.com">
+            </div>
+            <div class="input_unit">
+                <img src="{% static 'pics/square.JPG' %}">
+                <input required name="password1" id="password1" type="password" class="input_form" placeholder="password" maxlength="22" minlength="6">
+            </div>
+            <div class="input_unit">
+                <img src="{% static 'pics/square.JPG' %}">
+                <input required name="password2" id="password2" type="password" class="input_form" placeholder="confirm password" maxlength="22" minlength="6">
+            </div>
+            <input type="submit" class="submit" value="Signup">
+            <!--<input type="hidden" name="next" value="{{ next }}">-->
+        </div>
+        <a href="{% url 'login' %}">Already have an account?</a>
+    </form>
+</div>
+  <!--<form method="post">-->
+  <!--  {% csrf_token %}-->
+  <!--  {{ form.as_p }}-->
+  <!--  <button type="submit">Sign up</button>-->
+  <!--</form>-->
+{% endblock %}

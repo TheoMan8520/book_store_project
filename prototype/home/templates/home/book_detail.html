@@ -1,0 +1,108 @@
+{% extends 'client_header.html' %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/book_detail.css' %}">
+{% endblock %}
+{% block content %}
+<style>
+a1:hover, b1:hover, c1:hover {
+  background-color: yellow;
+}
+div.e:hover {
+    background-color:red;
+}
+</style>
+<div class="pic_frame">
+    <h1>Book Detail</h1>
+</div>
+<div class="book_detail">
+    <div class="book_detail_frame">
+        <div class="detail">
+            {% if book.content_type %}
+                <img src="{% url 'prototype:book_picture' book.id %}">
+            {% endif %}
+            <div class="text">
+                <h2>{{ book.title }}</h2>
+                <p>
+                    Price : {{ book.price }}
+                </p>
+                <p>
+                    Author :
+                    {% for record in author_records %}
+                        <a href="{% url 'prototype:author_detail' record.author.id %}">{{ record.author.name }}</a>
+                    {% endfor %}
+                </p>
+                <p>
+                    Publisher : <a href="{% url 'prototype:publisher_detail' book.publisher.id %}">{{ book.publisher }}</a>
+                </p>
+                <p>
+                    Category :
+                    {% for record in category_records %}
+                        <a href="{% url 'prototype:category_detail' record.category.id %}">{{ record.category.name }}</a>
+                    {% endfor %}
+                </p>
+                <p>
+                    {{ book.description }}
+                </p>
+                <hr>
+            </div>
+        </div>
+            {% if user.is_superuser %}
+                <hr>
+                <a href="{% url 'prototype:book_update' book.id %}">Update</a>
+                <a href="{% url 'prototype:book_delete' book.id %}">Delete</a>
+            {% elif user.is_authenticated %}
+                    {% if book.id in favorites %}
+                        <a href="{% url 'prototype:book_unfavorite' book.id %}" id="unfavorite">
+                            <div class="fav_icon">
+                                Unlike
+                            </div>
+                        </a>
+                    {% else %}
+                        <a href="{% url 'prototype:book_favorite' book.id %}" id="favorite">
+                            <div class="fav_icon">
+                                Like
+                            </div>
+                        </a>
+                    {% endif %}
+                <hr>
+                {% if book in inbasket_books %}
+                    <a href="{% url 'prototype:basket_delete' book.id %}">
+                        <div class="bask_icon">
+                            remove from basket
+                        </div>
+                    </a>
+                {% else %}
+                    <a href="{% url 'prototype:basket_add' book.id %}">
+                        <div class="bask_icon">
+                            add into basket
+                        </div>
+                    </a>
+                {% endif %}
+            {% endif %}
+    </div>
+</div>
+<div class="pic_frame">
+</div>
+
+<script>
+// function favPost(url, ad_id) {
+//     $.post(url, {},  function(rowz){
+//         $("#unfavorite_star_"+ad_id).toggle();
+//         $("#favorite_star_"+ad_id).toggle();
+//     })
+// }
+
+    // $("#unfavorite").click(function(){
+    //   $.get("{% url 'prototype:book_unfavorite' book.id %}");
+    // //   $("#fav_sec").load( "{% url 'prototype:book_detail' book.id %} #fav_sec" );
+    // });
+
+    // $("#favorite").click(function(){
+    //   $.get("{% url 'prototype:book_favorite' book.id %}");
+    //   $("#fav_sec").load( "{% url 'prototype:book_detail' book.id %} #fav_sec" );
+    // });
+</script>
+
+{% endblock %}
+

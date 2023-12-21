@@ -1,0 +1,104 @@
+{% extends 'client_header.html' %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/book_update.css' %}">
+{% endblock %}
+{% block content %}
+<div class="book_update">
+    <form action="{% url 'prototype:book_update' book.id %}" method="POST" class="book_form" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="input_group">
+            <h2>Book update: {{book.id}} {{book.title}}</h2>
+            <hr>
+            <div class="input_unit">
+                <img src="{% static 'pics/square.JPG' %}">
+                <input required name="title" id="title" type="text" class="input_form" value="{{book.title}}" maxlength="70" minlength="2">
+            </div>
+            <div class="input_unit">
+                <img src="{% static 'pics/square.JPG' %}">
+                <input required name="price" id="price" type="number" class="input_form" value="{{book.price}}">
+            </div>
+            <div class="input_unit">
+                <img src="{% static 'pics/square.JPG' %}">
+                <input required name="description" id="description" type="text" class="input_form" value="{{book.description}}" maxlength="2000" minlength="2">
+            </div>
+            <div class="input_unit">
+                <img src="{% static 'pics/square.JPG' %}">
+                <input name="picture" id="picture" type="file" value="{{book.picture}}" class="input_form">
+            </div>
+            <div class="input_unit">
+                <img src="{% static 'pics/square.JPG' %}">
+                <input required name="publisher" id="publisher" value="{{book.publisher}}" type="text" class="input_form"
+                placeholder="Select or create new publisher" list="publisher_choices">
+                <datalist id="publisher_choices">
+                    {% if publisher_list %}
+                        {% for publisher in publisher_list %}
+                            <option value="{{publisher.name}}">
+                        {% endfor %}
+                    {% endif %}
+                </datalist>
+            </div>
+
+            <div class="input_unit">
+                <img src="{% static 'pics/square.JPG' %}">
+                <input required name="author1" id="author1" type="text" class="input_form"
+                placeholder="Select or create new author" list="author_choices">
+                <datalist id="author_choices">
+                    {% if author_list %}
+                        {% for author in author_list %}
+                            <option value="{{author.name}}">
+                        {% endfor %}
+                    {% endif %}
+                </datalist>
+            </div>
+            <div class="input_unit">
+                <img src="{% static 'pics/square.JPG' %}">
+                <input name="author2" id="author2" type="text" class="input_form"
+                placeholder="If no then leave blank" list="author_choices">
+            </div>
+            <div class="input_unit">
+                <img src="{% static 'pics/square.JPG' %}">
+                <input name="author3" id="author3" type="text" class="input_form"
+                placeholder="If no then leave blank" list="author_choices">
+            </div>
+
+            <div class="input_unit">
+                <img src="{% static 'pics/square.JPG' %}">
+                <input required name="category1" id="category1" type="text" class="input_form"
+                placeholder="Select or create new category" list="category_choices">
+                <datalist id="category_choices">
+                    {% if author_list %}
+                        {% for category in category_list %}
+                            <option value="{{category.name}}">
+                        {% endfor %}
+                    {% endif %}
+                </datalist>
+            </div>
+            <div class="input_unit">
+                <img src="{% static 'pics/square.JPG' %}">
+                <input name="category2" id="category2" type="text" class="input_form"
+                placeholder="If no then leave blank" list="category_choices">
+            </div>
+            <div class="input_unit">
+                <img src="{% static 'pics/square.JPG' %}">
+                <input name="category3" id="category3" type="text" class="input_form"
+                placeholder="If no then leave blank" list="category_choices">
+            </div>
+            <input type="submit" class="submit">
+        </div>
+    </form>
+</div>
+
+<script>
+$("#book_form").submit(function() {
+  console.log('Checking file size');
+  if (window.File && window.FileReader && window.FileList && window.Blob) {
+      var file = $('#id_{{ form.upload_field_name }}')[0].files[0];
+      if (file && file.size > {{ form.max_upload_limit }} ) {
+          alert("File " + file.name + " of type " + file.type + " must be < {{ form.max_upload_limit_text }}");
+      return false;
+    }
+  }
+});
+</script>
+{% endblock %}

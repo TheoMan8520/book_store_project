@@ -1,0 +1,48 @@
+{% extends 'client_header.html' %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/publisher_detail.css' %}">
+{% endblock %}
+{% block content %}
+<div class="pic_frame">
+    <h1>{{ category.name }}</h1>
+</div>
+<div class="publisher_detail">
+    <div class="publisher_detail_frame">
+        <div class="detail">
+            <div class="text">
+                <!--<p>-->
+                <!--    related books-->
+                <!--</p>-->
+                <!--<hr>-->
+                <div class="book_list_group">
+                    {% if books %}
+                    <ul>
+                        {% for book in books %}
+                            <li>
+                                <a href="{% url 'prototype:book_detail'  book.id %}">
+                                    {% if book.content_type %}
+                                        <img src="{% url 'prototype:book_picture' book.id %}">
+                                    {% endif %}
+                                    <h2>{{ book.title }}</h2>
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                        <p>There are no book in the library.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% if user.is_superuser %}
+            <hr>
+            <a href="{% url 'prototype:category_update' category.id %}">Update</a>
+            <a href="{% url 'prototype:category_delete' category.id %}">Delete</a>
+        {% endif %}
+    </div>
+</div>
+<div class="pic_frame">
+</div>
+{% endblock %}
+

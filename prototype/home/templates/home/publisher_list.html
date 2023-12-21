@@ -1,0 +1,35 @@
+{% extends 'client_header.html' %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/publisher_list.css' %}">
+{% endblock %}
+{% block content %}
+<div class="pic_frame">
+    <h1>Publishers</h1>
+</div>
+<div class="publisher_list">
+    <div class="publisher_list_frame">
+        <div class="publisher_list_group">
+            {% if publisher_list %}
+            <ul>
+                {% for publisher in publisher_list %}
+                    <li>
+                        <a href="{% url 'prototype:publisher_detail'  publisher.id %}">
+                            {% if publisher.content_type %}
+                                <img src="{% url 'prototype:publisher_picture' publisher.id %}">
+                            {% endif %}
+                            <h2>{{ publisher.name }}</h2>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+                <p>There are no publisher in the database.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<div class="pic_frame">
+    <h1>End of Publisher list</h1>
+</div>
+{% endblock %}

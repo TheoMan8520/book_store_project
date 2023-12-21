@@ -1,0 +1,35 @@
+{% extends 'client_header.html' %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/publisher_list.css' %}">
+{% endblock %}
+{% block content %}
+<div class="pic_frame">
+    <h1>Authors</h1>
+</div>
+<div class="publisher_list">
+    <div class="publisher_list_frame">
+        <div class="publisher_list_group">
+            {% if author_list %}
+            <ul>
+                {% for author in author_list %}
+                    <li>
+                        <a href="{% url 'prototype:author_detail'  author.id %}">
+                            {% if author.content_type %}
+                                <img src="{% url 'prototype:author_picture' author.id %}">
+                            {% endif %}
+                            <h2>{{ author.name }}</h2>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+                <p>There are no author in the database.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<div class="pic_frame">
+    <h1>End of Author list</h1>
+</div>
+{% endblock %}

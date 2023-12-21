@@ -1,0 +1,33 @@
+{% extends "client_header.html" %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
+{% endblock %}
+{% block content %}
+
+{% if form.errors %}
+  <p>Your username and password didn't match. Please try again.</p>
+{% endif %}
+
+<div class="login">
+    <form method="post" class="login_form">
+        {% csrf_token %}
+        <div class="input_group">
+            <h2>Login</h2>
+            <hr>
+            <div class="input_unit">
+               <img src="{% static 'pics/square.JPG' %}">
+                <input required name="username" id="username" type="text" class="input_form" placeholder="Username" maxlength="16" minlength="4">
+            </div>
+            <div class="input_unit">
+                <img src="{% static 'pics/square.JPG' %}">
+                <input required name="password" id="password" type="password" class="input_form" placeholder="password" maxlength="22" minlength="6">
+            </div>
+            <input type="submit" class="submit" value="Login" />
+            <!--<input type="hidden" name="next" value="{{ next }}" />-->
+        </div>
+        <a href="{% url 'prototype:signup' %}">Haven't sign up?</a>
+    </form>
+</div>
+
+{% endblock %}

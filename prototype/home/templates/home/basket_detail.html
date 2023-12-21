@@ -1,0 +1,75 @@
+{% extends 'client_header.html' %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/basket_detail.css' %}">
+{% endblock %}
+{% block content %}
+<div class="book_list">
+    <div class="book_list_frame">
+        <h1>Order Summary</h1>
+        <div class="book_list_group">
+            {% if records %}
+                <ul>
+                    {% for record in records %}
+                        <li>
+                            <a href="{% url 'prototype:book_detail'  record.book.id %}">
+                                {% if record.book.content_type %}
+                                    <img src="{% url 'prototype:book_picture' record.book.id %}">
+                                {% endif %}
+                            </a>
+                            <div class="div1">
+                                <div class="subdiv1">
+                                    <div class="book_detail">
+                                            <h2>Title: {{ record.book.title }}</h2>
+                                            <h2>Price: {{ record.book.price }} bath</h2>
+                                            <a href="{% url 'prototype:basket_delete' record.book.id %}">remove from basket</a>
+                                    </div>
+                                    <form action="{% url 'prototype:amount_update' record.book.id %}" method="POST" class="amount" id="amount_update">
+                                        {% csrf_token %}
+                                        <a href="javascript:;" onclick="parentNode.submit();">
+                                            <input required name="amount" id="amount" type="number" class="input_form" value="{{ record.amount }}" min="1">
+                                            <input type="hidden" name="book_id" value="{{record.book.id}}">
+                                        </a>
+                                    </form>
+                                </div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <div class="sum" id="sum">
+                    Shipping:     50
+                    <br>
+                    Total:      {{basket.total}}
+                </div>
+                <input type="button" value="Confirm Order" class="submit" onclick="confirmOrder()">
+            {% else %}
+                <p>There are no book in the basket.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var formsCollection;
+    var r;
+
+    formsCollection=document.forms;
+
+    function confirmOrder() {
+        // for(r=0;r<formsCollection.length;r++) {
+        //     // document.forms[r].submit();
+        //     formsCollection[r].submit();
+        //     alert('submit: ' + r);
+        // }
+        // alert("wait")
+        window.location.href='{% url 'prototype:confirm_order' %}';
+    }
+
+    $("#amount").click(function(){
+    //   $("amount_update").submit();
+      $( "#sum" ).load( "{% url 'prototype:basket' %} #sum" );
+    });
+
+</script>
+{% endblock %}
+

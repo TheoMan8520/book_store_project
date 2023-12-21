@@ -1,0 +1,93 @@
+.book_update {
+    /*background: black;*/
+    width: 100%;
+    /*padding: 1px 3% 1px 2%;*/
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    font-family: "Kanit";
+    color: darkslateblue;
+}
+
+.book_update h2 {
+    text-align: center;
+}
+
+.book_form {
+    /*position: absolute;*/
+    /*top: 15%;*/
+    /*right: 30%;*/
+    width: 400px;
+}
+
+.book_form a {
+    text-decoration: none;
+}
+
+.input_group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: white;
+    margin: 20px;
+    padding: 15px;
+    gap: 5px;
+    border-radius: 10px;
+}
+
+.input_group hr {
+    border: 0;
+    height: 1px;
+    width: 100%;
+    background: darkslateblue;
+    margin: 8px 0 10px;
+}
+
+.input_unit {
+    display: flex;
+    align-items: center;
+    width: 90%;
+    /*margin: 12px 0 12px 0;*/
+    /*border: 2px solid red;*/
+    /*border-radius: 4px;*/
+}
+
+.input_unit img {
+    width: 40px;
+    border-radius: 50%;
+    padding: 8px;
+    margin-right: 10px;
+}
+
+.input_unit input {
+    font-family: "Kanit";
+    width: 70%;
+    font-size: 15px;
+    border: none;
+    border-bottom: 2px solid red;
+    text-align: left;
+}
+
+.input_unit textarea {
+    font-family: "Kanit";
+    height: 70px;
+    width: 70%;
+    font-size: 15px;
+    border: 2px solid red;
+    text-align: left;
+    resize: none;
+}
+
+.submit {
+    width: 20%;
+    align-items: center;
+
+    font-family: "Kanit";
+    font-size: 15px;
+    font-weight: 600;
+    background: wheat;
+    border: 2px solid blue;
+    border-radius: 4px;
+}

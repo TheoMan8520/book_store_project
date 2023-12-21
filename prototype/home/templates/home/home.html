@@ -1,0 +1,204 @@
+{% extends "client_header.html" %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
+{% endblock %}
+{% block content %}
+<div class="pic_frame">
+    <h1>Welcome to the Library</h1>
+</div>
+<div class="moto">
+    <div class="text">
+        <div class="text1">A room without <h1>BOOKS</h1></div>
+        <div class="text2">-- is like a body without a soul</div>
+        <div class ="text3">Marcus Tullius Cicero</div>
+    </div>
+    <div class="pic">
+        <img src="{% static 'pics/marcus.jpeg' %}">
+    </div>
+</div>
+<div class="trending_frame">
+    <div class="head_trend">
+        <h1>Trending books</h1>
+    </div>
+    <div class="body">
+        <div class="book_list_group">
+        {% if book_list %}
+            <ul>
+                {% for book in book_list %}
+                    <li>
+                        <a href="{% url 'prototype:book_detail'  book.id %}">
+                            {% if book.content_type %}
+                                <img src="{% url 'prototype:book_picture' book.id %}">
+                            {% endif %}
+                            <h2>{{ book.title }}</h2>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        </div>
+    </div>
+</div>
+<div class="">
+    <div class="head">
+        <h1>non-fiction</h1>
+    </div>
+    <div class="body">
+        <div class="book_list_group">
+        {% if non_books %}
+            <ul>
+                {% for record in non_books %}
+                    <li>
+                        <a href="{% url 'prototype:book_detail'  record.book.id %}">
+                            {% if record.book.content_type %}
+                                <img src="{% url 'prototype:book_picture' record.book.id %}">
+                            {% endif %}
+                            <h2>{{ record.book.title }}</h2>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        </div>
+    </div>
+</div>
+<div class="">
+    <div class="head">
+        <h1>fiction</h1>
+    </div>
+    <div class="body">
+        <div class="book_list_group">
+        {% if fic_books %}
+            <ul>
+                {% for record in fic_books %}
+                    <li>
+                        <a href="{% url 'prototype:book_detail'  record.book.id %}">
+                            {% if record.book.content_type %}
+                                <img src="{% url 'prototype:book_picture' record.book.id %}">
+                            {% endif %}
+                            <h2>{{ record.book.title }}</h2>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        </div>
+    </div>
+</div>
+<div class="">
+    <div class="head">
+        <h1>history</h1>
+    </div>
+    <div class="body">
+        <div class="book_list_group">
+        {% if his_books %}
+            <ul>
+                {% for record in his_books %}
+                    <li>
+                        <a href="{% url 'prototype:book_detail'  record.book.id %}">
+                            {% if record.book.content_type %}
+                                <img src="{% url 'prototype:book_picture' record.book.id %}">
+                            {% endif %}
+                            <h2>{{ record.book.title }}</h2>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        </div>
+    </div>
+</div>
+<div class="">
+    <div class="head">
+        <h1>fantasy</h1>
+    </div>
+    <div class="body">
+        <div class="book_list_group">
+        {% if fan_books %}
+            <ul>
+                {% for record in fan_books %}
+                    <li>
+                        <a href="{% url 'prototype:book_detail'  record.book.id %}">
+                            {% if record.book.content_type %}
+                                <img src="{% url 'prototype:book_picture' record.book.id %}">
+                            {% endif %}
+                            <h2>{{ record.book.title }}</h2>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        </div>
+    </div>
+</div>
+<div class="">
+    <div class="head">
+        <h1>science</h1>
+    </div>
+    <div class="body">
+        <div class="book_list_group">
+        {% if sci_books %}
+            <ul>
+                {% for record in sci_books %}
+                    <li>
+                        <a href="{% url 'prototype:book_detail'  record.book.id %}">
+                            {% if record.book.content_type %}
+                                <img src="{% url 'prototype:book_picture' record.book.id %}">
+                            {% endif %}
+                            <h2>{{ record.book.title }}</h2>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        </div>
+    </div>
+</div>
+<div class="">
+    <div class="head">
+        <h1>horror</h1>
+    </div>
+    <div class="body">
+        <div class="book_list_group">
+        {% if hor_books %}
+            <ul>
+                {% for record in hor_books %}
+                    <li>
+                        <a href="{% url 'prototype:book_detail'  record.book.id %}">
+                            {% if record.book.content_type %}
+                                <img src="{% url 'prototype:book_picture' record.book.id %}">
+                            {% endif %}
+                            <h2>{{ record.book.title }}</h2>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        </div>
+    </div>
+</div>
+<div class="">
+    <div class="head">
+        <h1>kids</h1>
+    </div>
+    <div class="body">
+        <div class="book_list_group">
+        {% if kid_books %}
+            <ul>
+                {% for record in kid_books %}
+                    <li>
+                        <a href="{% url 'prototype:book_detail'  record.book.id %}">
+                            {% if record.book.content_type %}
+                                <img src="{% url 'prototype:book_picture' record.book.id %}">
+                            {% endif %}
+                            <h2>{{ record.book.title }}</h2>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

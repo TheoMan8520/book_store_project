@@ -1,0 +1,35 @@
+{% extends 'client_header.html' %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/order_list.css' %}">
+{% endblock %}
+{% block content %}
+<div class="order_list">
+    <div class="order_list_frame">
+        <h1>Orders</h1>
+        <div class="order_list_group">
+            {% if orders %}
+            <ul>
+                {% for order in orders %}
+                    {% if order.user == user or user.is_superuser %}
+                        {% if order.status == "รอการชำระเงิน" or order.status == "รอการตรวจสอบการชำระเงิน" %}
+                            <li>
+                                <a href="{% url 'prototype:order_detail' order.id %}">
+                                    order: {{order.id}}
+                                    from: {{order.user.id}}:{{order.user.username}}
+                                    status: {{order.status}}
+                                </a>
+                            </li>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </ul>
+            {% else %}
+                <p>There are no order</p>
+            {% endif %}
+        </div>
+        <h1>End of order</h1>
+    </div>
+</div>
+{% endblock %}
+

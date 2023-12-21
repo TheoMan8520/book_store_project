@@ -1,0 +1,81 @@
+{% extends 'client_header.html' %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/search.css' %}">
+{% endblock %}
+{% block content %}
+<div class="pic_frame">
+    <h1>Search</h1>
+</div>
+<div class="book_list">
+    <div class="book_list_frame">
+        <div class="head">
+            <h1>Book Search</h1>
+        </div>
+        <div class="book_list_group">
+            {% if book_list %}
+            <ul>
+                {% for book in book_list %}
+                    <li>
+                        <a href="{% url 'prototype:book_detail'  book.id %}">
+                            {% if book.content_type %}
+                                <img src="{% url 'prototype:book_picture' book.id %}">
+                            {% endif %}
+                            <h2>{{ book.title }}</h2>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+                <p>There are no book matched.</p>
+            {% endif %}
+        </div>
+
+        <div class="head">
+            <h1>Author Search</h1>
+        </div>
+        <div class="book_list_group">
+            {% if author_list %}
+            <ul>
+                {% for author in author_list %}
+                    <li>
+                        <a href="{% url 'prototype:author_detail'  author.id %}">
+                            {% if author.content_type %}
+                                <img src="{% url 'prototype:author_picture' author.id %}">
+                            {% endif %}
+                            <h2>{{ author.name }}</h2>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+                <p>There are no author matched.</p>
+            {% endif %}
+        </div>
+
+        <div class="head">
+            <h1>Publisher Search</h1>
+        </div>
+        <div class="book_list_group">
+            {% if publisher_list %}
+            <ul>
+                {% for publisher in publisher_list %}
+                    <li>
+                        <a href="{% url 'prototype:publisher_detail'  publisher.id %}">
+                            {% if publisher.content_type %}
+                                <img src="{% url 'prototype:publisher_picture' publisher.id %}">
+                            {% endif %}
+                            <h2>{{ publisher.name }}</h2>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+                <p>There are no publisher matched.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<div class="pic_frame">
+</div>
+{% endblock %}
